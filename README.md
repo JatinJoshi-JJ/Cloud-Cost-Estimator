@@ -154,6 +154,26 @@ Contributions, feature requests, and rate-card updates are warmly welcomed!
 
 ---
 
+## 📸 Live Application & Verification Screenshots
+
+### 1. Live Edge Hosted Application (`cloudcostiq.netlify.app`)
+
+![CloudCostIQ Landing Preview](./screenshots/cloudcostiq-landing-preview.jpg)
+
+### 2. Interactive Cost Simulator & Budget Overrun Alert
+
+![Cost Simulator Dashboard](./screenshots/cost-simulator-dashboard.png)
+
+### 3. Auto-Generated Infrastructure Budget Report (`.md`)
+
+![Generated Budget Report](./screenshots/generated-budget-report.png)
+
+### 4. GitHub Repository & Pricing Dataset Structure
+
+![GitHub Repository Structure](./screenshots/github-repository-structure.png)
+
+---
+
 ## 📄 License
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
