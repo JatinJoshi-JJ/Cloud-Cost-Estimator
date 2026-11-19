@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CloudCostIQ | Cloud Infrastructure Cost Estimator & FinOps Engine</title>
+    <meta name="description" content="Simulate monthly compute, storage, database, and egress cloud costs with automated Free-Tier deductions, real-time budget overrun alerts, and architectural trade-off comparisons." />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="favicon.svg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Preloader Screen -->
+    <div id="pagePreloader" class="page-preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                </svg>
+            </div>
+            <div class="preloader-brand">CloudCost<span>IQ</span></div>
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+            <p class="preloader-status">Initializing FinOps Engine & Pricing Matrix...</p>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="logo" aria-label="CloudCostIQ Home">
+                <div class="logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                    </svg>
+                </div>
+                <div class="logo-text">CloudCost<span>IQ</span></div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#simulator" class="active-nav">Cost Simulator</a>
+                <a href="#providers">Cloud Matrix</a>
+                <a href="#architecture">FinOps Playbook</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="badge">
+                    <span class="pulse-dot"></span>
+                    <span class="badge-text">Free-Tier Aware • FinOps Engine</span>
+                </div>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme" title="Switch Theme">
+                    <span class="theme-icon light-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2"></path>
+                            <path d="M12 20v2"></path>
+                            <path d="m4.93 4.93 1.41 1.41"></path>
+                            <path d="m17.66 17.66 1.41 1.41"></path>
+                            <path d="M2 12h2"></path>
+                            <path d="M20 12h2"></path>
+                            <path d="m6.34 17.66-1.41 1.41"></path>
+                            <path d="m19.07 4.93-1.41 1.41"></path>
+                        </svg>
+                    </span>
+                    <span class="theme-icon dark-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                        </svg>
+                    </span>
+                </button>
+                <a href="#simulator" class="btn-nav-cta">Launch Estimator</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===================================================================
+             1. HERO SECTION
+             =================================================================== -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="eyebrow-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>FinOps 2026 Ready • Automated Free-Tier Deduction</span>
+                </div>
+                <h1 class="hero-title">
+                    Stop Guessing Your Cloud Bill.<br>
+                    <span class="text-gradient">Simulate Real Costs in Seconds.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Architect, model, and forecast multi-cloud infrastructure expenditures with instant Free-Tier allowances, egress bandwidth thresholds, and architectural trade-off comparisons before provisioning resources.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="#simulator" class="btn-primary hero-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                        </svg>
+                        Launch Interactive Simulator
+                    </a>
+                    <a href="#providers" class="btn-ghost hero-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                            <path d="M3 9h18"></path>
+                            <path d="M9 21V9"></path>
+                        </svg>
+                        Compare Provider Rates
+                    </a>
+                </div>
+
+                <!-- Live Metrics KPI Ticker Strip -->
+                <div class="stats-strip">
+                    <div class="stat-item">
+                        <div class="stat-value">$4.8M+</div>
+                        <div class="stat-label">Simulated Cloud Spend</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Free-Tier Verified Deductions</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Sign-Up or Telemetry Required</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">&lt; 5ms</div>
+                        <div class="stat-label">Real-Time Recalculation</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             2. VALUE PROPOSITION & CAPABILITIES SECTION
+             =================================================================== -->
+        <section id="features" class="section-container">
+            <div class="section-header-center">
+                <span class="sub-heading-pill">Why Costs Spiral</span>
+                <h2>Avoid the 3 Classic Cloud Pricing Pitfalls</h2>
+                <p>Most engineering teams discover billing spikes after production deployment. CloudCostIQ flags these traps during the architectural design phase.</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon icon-egress">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m18 8 4 4-4 4"></path>
+                            <path d="M2 12h20"></path>
+                            <path d="m6 16-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3>Hidden Egress Bandwidth Traps</h3>
+                    <p>Public Internet egress can cost up to <strong>$0.09/GB</strong>. CloudCostIQ models outbound traffic and recommends edge CDN caching to cut bandwidth bills by up to 70%.</p>
+                    <div class="feature-tag">Bandwidth Optimizer</div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon icon-storage">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Automated Free-Tier Deductions</h3>
+                    <p>Never pay for compute hours, object storage, or DB nodes that fall within free allowances. Our engine deducts <strong>750 hrs compute</strong> and <strong>100GB egress</strong> automatically.</p>
+                    <div class="feature-tag">Zero-Waste Engine</div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon icon-compute">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                            <line x1="16" x2="16" y1="2" y2="6"></line>
+                            <line x1="8" x2="8" y1="2" y2="6"></line>
+                            <line x1="3" x2="21" y1="10" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3>Commitment vs. On-Demand Analysis</h3>
+                    <p>Compare baseline On-Demand rates with <strong>1-Year Reserved Instances</strong> and <strong>Serverless pay-per-execution</strong> to optimize unit economics for predictable workloads.</p>
+                    <div class="feature-tag">Commitment Modeling</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             3. THE INTERACTIVE CLOUD COST ESTIMATOR (MAIN CORE TOOL)
+             =================================================================== -->
+        <section id="simulator" class="section-container simulator-section">
+            <!-- Header & Presets -->
+            <div class="simulator-intro">
+                <div class="intro-content">
+                    <span class="sub-heading-pill">Interactive FinOps Simulator</span>
+                    <h2>Configure Workload & Model Monthly Spend</h2>
+                    <p>Adjust compute run-time, storage volumes, database nodes, and outbound bandwidth. All rates calculate live with automatic free tier deduction.</p>
+                </div>
+
+                <div class="presets-container">
+                    <span class="preset-label">Quick Architecture Presets:</span>
+                    <div class="presets-group">
+                        <button type="button" class="preset-btn" data-preset="hobby">
+                            <span class="preset-icon">🌱</span>
+                            <span>Free Tier</span>
+                        </button>
+                        <button type="button" class="preset-btn active" data-preset="startup">
+                            <span class="preset-icon">🚀</span>
+                            <span>Startup App</span>
+                        </button>
+                        <button type="button" class="preset-btn" data-preset="enterprise">
+                            <span class="preset-icon">🏢</span>
+                            <span>High Traffic</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two-Column Perfectly Balanced Grid -->
+            <div class="layout-grid">
+                <!-- Left Column: Input Controls -->
+                <section class="card inputs-card">
+                    <div class="card-title-row">
+                        <div class="section-badge">
+                            <span class="step-num">1</span>
+                            <span>Workload Parameters</span>
+                        </div>
+                    </div>
+                    <p class="section-desc">Adjust monthly capacity allocations to evaluate cost drivers and free allowance coverage.</p>
+
+                    <!-- Compute Hours -->
+                    <div class="field-card">
+                        <div class="field-top">
+                            <div class="field-title">
+                                <div class="field-icon icon-compute">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+                                        <rect width="6" height="6" x="9" y="9" rx="1"></rect>
+                                        <path d="M15 2v2"></path>
+                                        <path d="M15 20v2"></path>
+                                        <path d="M2 15h2"></path>
+                                        <path d="M2 9h2"></path>
+                                        <path d="M20 15h2"></path>
+                                        <path d="M20 9h2"></path>
+                                        <path d="M9 2v2"></path>
+                                        <path d="M9 20v2"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <label for="serverHours">Virtual Server Hours</label>
+                                    <span class="sub-label">Compute run-time / month</span>
+                                </div>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="serverHours" value="950" min="0" step="10" />
+                                <span class="unit-tag">hrs</span>
+                            </div>
+                        </div>
+                        <div class="slider-wrapper">
+                            <input type="range" id="serverHoursRange" value="950" min="0" max="3000" step="10" />
+                        </div>
+                        <div class="field-meta">
+                            <span class="scale-hint">0 hrs</span>
+                            <span class="tier-chip">Free Tier: 750 hrs/mo</span>
+                            <span class="scale-hint">3,000 hrs</span>
+                        </div>
+                    </div>
+
+                    <!-- Storage GB -->
+                    <div class="field-card">
+                        <div class="field-top">
+                            <div class="field-title">
+                                <div class="field-icon icon-storage">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="22" x2="2" y1="12" y2="12"></line>
+                                        <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+                                        <line x1="6" x2="6.01" y1="16" y2="16"></line>
+                                        <line x1="10" x2="10.01" y1="16" y2="16"></line>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <label for="storageGB">Object & Block Storage</label>
+                                    <span class="sub-label">Persistent disk & file volume</span>
+                                </div>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="storageGB" value="120" min="0" step="5" />
+                                <span class="unit-tag">GB</span>
+                            </div>
+                        </div>
+                        <div class="slider-wrapper">
+                            <input type="range" id="storageGBRange" value="120" min="0" max="2000" step="5" />
+                        </div>
+                        <div class="field-meta">
+                            <span class="scale-hint">0 GB</span>
+                            <span class="tier-chip">Free Tier: 5 GB</span>
+                            <span class="scale-hint">2,000 GB</span>
+                        </div>
+                    </div>
+
+                    <!-- Database Instances -->
+                    <div class="field-card">
+                        <div class="field-top">
+                            <div class="field-title">
+                                <div class="field-icon icon-db">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <label for="dbInstances">Managed DB Instances</label>
+                                    <span class="sub-label">Dedicated relational clusters</span>
+                                </div>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="dbInstances" value="2" min="0" max="20" step="1" />
+                                <span class="unit-tag">nodes</span>
+                            </div>
+                        </div>
+                        <div class="slider-wrapper">
+                            <input type="range" id="dbInstancesRange" value="2" min="0" max="10" step="1" />
+                        </div>
+                        <div class="field-meta">
+                            <span class="scale-hint">0</span>
+                            <span class="tier-chip">1st instance free</span>
+                            <span class="scale-hint">10 nodes</span>
+                        </div>
+                    </div>
+
+                    <!-- Egress Bandwidth -->
+                    <div class="field-card">
+                        <div class="field-top">
+                            <div class="field-title">
+                                <div class="field-icon icon-egress">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m18 8 4 4-4 4"></path>
+                                        <path d="M2 12h20"></path>
+                                        <path d="m6 16-4-4 4-4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <label for="egressGB">Outbound Egress Bandwidth</label>
+                                    <span class="sub-label">Public Internet data transfer</span>
+                                </div>
+                            </div>
+                            <div class="input-with-unit">
+                                <input type="number" id="egressGB" value="250" min="0" step="10" />
+                                <span class="unit-tag">GB</span>
+                            </div>
+                        </div>
+                        <div class="slider-wrapper">
+                            <input type="range" id="egressGBRange" value="250" min="0" max="5000" step="10" />
+                        </div>
+                        <div class="field-meta">
+                            <span class="scale-hint">0 GB</span>
+                            <span class="tier-chip">Free Tier: 100 GB</span>
+                            <span class="scale-hint">5,000 GB</span>
+                        </div>
+                    </div>
+
+                    <!-- Budget Limit -->
+                    <div class="field-card budget-field">
+                        <div class="field-top">
+                            <div class="field-title">
+                                <div class="field-icon icon-budget">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M12 6v12M15 9.5a2.5 2.5 0 0 0-5 0c0 2.5 5 2 5 5a2.5 2.5 0 0 1-5 0"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <label for="budgetLimit">Target Monthly Budget</label>
+                                    <span class="sub-label">Threshold for overrun alerts</span>
+                                </div>
+                            </div>
+                            <div class="input-with-unit">
+                                <span class="unit-prefix">$</span>
+                                <input type="number" id="budgetLimit" value="35" min="1" step="5" />
+                                <span class="unit-tag">USD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button type="button" id="calculateBtn" class="btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                            </svg>
+                            Recalculate Costs
+                        </button>
+                        <button type="button" id="resetBtn" class="btn-ghost" title="Reset all inputs to Startup preset">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                            </svg>
+                            Reset
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Right Column: Results & Comparisons -->
+                <section class="card summary-card">
+                    <div class="card-head">
+                        <div class="section-badge">
+                            <span class="step-num">2</span>
+                            <span>Estimated Monthly Expenditure</span>
+                        </div>
+                        <span id="liveSyncBadge" class="live-tag">
+                            <span class="pulse-dot-green"></span>
+                            Live Sync
+                        </span>
+                    </div>
+
+                    <!-- Hero Total Box -->
+                    <div class="total-box">
+                        <div class="total-content">
+                            <div class="total-label-row">
+                                <span class="label">Net Billed Total (On-Demand)</span>
+                                <span class="sub-period">Billed monthly</span>
+                            </div>
+                            <div class="price-row">
+                                <div id="netTotal" class="price">$0.00</div>
+                                <span class="price-frequency">/ month</span>
+                            </div>
+                            <div class="total-auxiliary">
+                                <span class="aux-item">Daily run-rate: <strong id="dailyEstimate">$0.00</strong></span>
+                                <span class="aux-divider">•</span>
+                                <span class="aux-item">Pre-deduction: <strong id="grossTotal">$0.00</strong></span>
+                            </div>
+                        </div>
+                        <div class="savings-container">
+                            <div class="savings-pill" id="freeTierSaved">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                                Free Tier Saved: $0.00
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Cost Share Bar -->
+                    <div class="bar-wrapper">
+                        <div class="bar-header">
+                            <span class="bar-title">Cost Allocation by Resource</span>
+                            <span class="bar-hint">Relative expenditure share</span>
+                        </div>
+                        <div class="cost-bar" id="costBar">
+                            <span id="barCompute" style="width: 25%"></span>
+                            <span id="barStorage" style="width: 25%"></span>
+                            <span id="barDB" style="width: 25%"></span>
+                            <span id="barEgress" style="width: 25%"></span>
+                        </div>
+                        <div class="bar-legend">
+                            <div class="legend-item"><i class="dot c-comp"></i>Compute <span id="pctCompute" class="legend-pct">25%</span></div>
+                            <div class="legend-item"><i class="dot c-stor"></i>Storage <span id="pctStorage" class="legend-pct">25%</span></div>
+                            <div class="legend-item"><i class="dot c-db"></i>Database <span id="pctDB" class="legend-pct">25%</span></div>
+                            <div class="legend-item"><i class="dot c-egr"></i>Egress <span id="pctEgress" class="legend-pct">25%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Budget Alert Banner -->
+                    <div id="budgetAlert" class="alert-box"></div>
+
+                    <!-- Resource Breakdown Table -->
+                    <div class="table-container">
+                        <table class="breakdown-table">
+                            <thead>
+                                <tr>
+                                    <th>Resource Category</th>
+                                    <th>Configured</th>
+                                    <th>Billable</th>
+                                    <th>Monthly Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody id="breakdownBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Full-Width Bottom Section: Architecture Trade-Offs (Fixes Left/Right Height Asymmetry) -->
+            <div class="card tradeoffs-section">
+                <div class="tradeoffs-header">
+                    <div>
+                        <div class="section-badge">
+                            <span class="step-num">3</span>
+                            <span>Architecture & Pricing Trade-Offs</span>
+                        </div>
+                        <p class="section-desc" style="margin-bottom: 0;">Automated FinOps analysis comparing commitments, alternative workload paradigms, and egress routing.</p>
+                    </div>
+                    <div class="tradeoffs-action">
+                        <button type="button" id="downloadReportBtn" class="btn-secondary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" x2="12" y1="15" y2="3"></line>
+                            </svg>
+                            Download Budget Report (.md)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tradeoffs-grid">
+                    <!-- Tile 1: Reserved Instance Analysis -->
+                    <div class="mini-card">
+                        <div class="mini-card-head">
+                            <div class="mini-icon icon-reserved">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                                    <line x1="16" x2="16" y1="2" y2="6"></line>
+                                    <line x1="8" x2="8" y1="2" y2="6"></line>
+                                    <line x1="3" x2="21" y1="10" y2="10"></line>
+                                </svg>
+                            </div>
+                            <h4>On-Demand vs. Reserved (1-Yr)</h4>
+                        </div>
+                        <p id="reservedCompare">—</p>
+                        <span class="card-pill pill-save">Commitment Option</span>
+                    </div>
+
+                    <!-- Tile 2: Provisioned VM vs Serverless -->
+                    <div class="mini-card">
+                        <div class="mini-card-head">
+                            <div class="mini-icon icon-serverless">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </div>
+                            <h4>Provisioned VM vs. Serverless</h4>
+                        </div>
+                        <p id="serverlessCompare">—</p>
+                        <span class="card-pill pill-arch">Compute Strategy</span>
+                    </div>
+
+                    <!-- Tile 3: Egress & Caching Strategy -->
+                    <div class="mini-card">
+                        <div class="mini-card-head">
+                            <div class="mini-icon icon-cdn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>Edge CDN & Bandwidth Protection</h4>
+                        </div>
+                        <p>Placing Amazon CloudFront or Cloudflare in front of static storage reduces public egress from $0.09/GB to $0.00 – $0.02/GB, shielding your budget from unexpected scrape traffic.</p>
+                        <span class="card-pill pill-opt">Bandwidth Shield</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             4. MULTI-CLOUD PROVIDER PRICING MATRIX
+             =================================================================== -->
+        <section id="providers" class="section-container">
+            <div class="section-header-center">
+                <span class="sub-heading-pill">Multi-Cloud Intelligence</span>
+                <h2>Cloud Provider Free-Tier & Rate Comparison</h2>
+                <p>How the major hyper-scalers compare on compute allowances, object storage, and egress tariffs.</p>
+            </div>
+
+            <div class="provider-matrix-grid">
+                <!-- AWS Card -->
+                <div class="provider-card">
+                    <div class="provider-top">
+                        <div class="provider-badge aws">AWS</div>
+                        <span class="provider-status">12-Mo Free Tier</span>
+                    </div>
+                    <h3>Amazon Web Services</h3>
+                    <ul class="provider-perks">
+                        <li><span>Compute:</span> 750 hrs t2.micro / t3.micro</li>
+                        <li><span>Storage:</span> 5 GB Amazon S3 Standard</li>
+                        <li><span>Database:</span> 750 hrs db.t2/t3.micro (RDS)</li>
+                        <li><span>Egress:</span> 100 GB/mo free to Internet</li>
+                        <li><span>Over-quota Egress:</span> ~$0.09 / GB</li>
+                    </ul>
+                </div>
+
+                <!-- Google Cloud Card -->
+                <div class="provider-card">
+                    <div class="provider-top">
+                        <div class="provider-badge gcp">GCP</div>
+                        <span class="provider-status">Always Free Tier</span>
+                    </div>
+                    <h3>Google Cloud Platform</h3>
+                    <ul class="provider-perks">
+                        <li><span>Compute:</span> 1 e2-micro instance (US regions)</li>
+                        <li><span>Storage:</span> 5 GB Cloud Storage (Standard)</li>
+                        <li><span>Serverless:</span> 2M Cloud Run invocations</li>
+                        <li><span>Egress:</span> 1 GB/mo free to Internet</li>
+                        <li><span>Over-quota Egress:</span> ~$0.12 / GB</li>
+                    </ul>
+                </div>
+
+                <!-- Microsoft Azure Card -->
+                <div class="provider-card">
+                    <div class="provider-top">
+                        <div class="provider-badge azure">Azure</div>
+                        <span class="provider-status">12-Mo Services</span>
+                    </div>
+                    <h3>Microsoft Azure</h3>
+                    <ul class="provider-perks">
+                        <li><span>Compute:</span> 750 hrs B1s Burstable VM</li>
+                        <li><span>Storage:</span> 5 GB LRS Blob Storage</li>
+                        <li><span>Database:</span> 750 hrs Azure SQL Database</li>
+                        <li><span>Egress:</span> 100 GB/mo free data transfer</li>
+                        <li><span>Over-quota Egress:</span> ~$0.087 / GB</li>
+                    </ul>
+                </div>
+
+                <!-- Cloudflare Card -->
+                <div class="provider-card">
+                    <div class="provider-top">
+                        <div class="provider-badge cf">Cloudflare</div>
+                        <span class="provider-status">Zero Egress</span>
+                    </div>
+                    <h3>Cloudflare R2 & Workers</h3>
+                    <ul class="provider-perks">
+                        <li><span>Compute:</span> 100,000 Workers reqs/day free</li>
+                        <li><span>Storage:</span> 10 GB R2 Object Storage</li>
+                        <li><span>Egress:</span> <strong>$0.00 / GB Egress Fees (Free)</strong></li>
+                        <li><span>CDN:</span> Unmetered static asset caching</li>
+                        <li><span>Over-quota Storage:</span> $0.015 / GB</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             5. FINOPS ARCHITECTURE BEST PRACTICES PLAYBOOK
+             =================================================================== -->
+        <section id="architecture" class="section-container">
+            <div class="section-header-center">
+                <span class="sub-heading-pill">Engineering Playbook</span>
+                <h2>4 FinOps Rules for Lean Infrastructure</h2>
+                <p>Proven architecture patterns to keep monthly infrastructure burn minimal without sacrificing reliability.</p>
+            </div>
+
+            <div class="playbook-grid">
+                <div class="playbook-card">
+                    <div class="playbook-number">01</div>
+                    <h4>Right-Size Before You Scale</h4>
+                    <p>80% of virtual instances run at less than 15% average CPU utilization. Downgrading oversized VMs or adopting modern ARM Graviton instances immediately yields 20–40% cost reduction.</p>
+                </div>
+
+                <div class="playbook-card">
+                    <div class="playbook-number">02</div>
+                    <h4>Automate Storage Lifecycle Policies</h4>
+                    <p>Transition object storage buckets from Standard to Infrequent Access (IA) or Glacier Archive after 30–90 days. Avoid paying prime storage rates on unaccessed log dumps and backups.</p>
+                </div>
+
+                <div class="playbook-card">
+                    <div class="playbook-number">03</div>
+                    <h4>Leverage Burst Serverless for Low-Duty Workloads</h4>
+                    <p>If your application services background cron jobs or periodic webhooks, pay-per-millisecond serverless functions run practically free compared to keeping dedicated 24/7 VMs idle.</p>
+                </div>
+
+                <div class="playbook-card">
+                    <div class="playbook-number">04</div>
+                    <h4>Keep Inter-Service Traffic in Same Availability Zone</h4>
+                    <p>Cross-AZ data transfer within AWS or GCP is secretly billed at $0.01/GB in each direction. Co-locating chatty microservices within the same AZ eliminates internal transit fees.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             6. TESTIMONIALS & COMMUNITY VALIDATION
+             =================================================================== -->
+        <section id="testimonials" class="section-container">
+            <div class="section-header-center">
+                <span class="sub-heading-pill">Community Verified</span>
+                <h2>Trusted by DevOps & FinOps Engineers</h2>
+                <p>See how cloud architects and startup founders use CloudCostIQ to prevent bill surprises.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"CloudCostIQ saved our seed-stage startup from a $1,400 surprise AWS bill. The automatic Free-Tier deduction and egress alerts made our Terraform sizing effortless."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-1">AK</div>
+                        <div>
+                            <strong>Anand K.</strong>
+                            <span>Head of Platform • SaaSify</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"The Reserved Instance vs. On-Demand calculation alone gave our engineering team the exact ammunition needed to convince our CFO to commit to 1-year instances."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-2">MR</div>
+                        <div>
+                            <strong>Maya Rodriguez</strong>
+                            <span>Lead FinOps Consultant • CloudScale</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Clean, lightning-fast, and completely zero sign-up. We run this calculator during sprint architecture reviews before provisioning any new database cluster."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-3">DS</div>
+                        <div>
+                            <strong>David S.</strong>
+                            <span>DevOps Lead • FinStream</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             7. INTERACTIVE ACCORDION FAQ
+             =================================================================== -->
+        <section id="faq" class="section-container">
+            <div class="section-header-center">
+                <span class="sub-heading-pill">Got Questions?</span>
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about cloud cost estimations, free tier policies, and security.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <!-- Item 1 -->
+                <div class="faq-item active">
+                    <button class="faq-question" type="button">
+                        <span>How does CloudCostIQ calculate free-tier savings?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>CloudCostIQ models the standard tier allowances published by major cloud vendors (e.g. 750 server hours, 5 GB object storage, 1 database instance, and 100 GB outbound egress). It subtracts these baseline allowances from your entered workload before calculating billable usage, computing the net difference as your Free Tier Saved amount.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>Is my infrastructure workload data private and secure?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, 100% private. All calculations occur entirely inside your browser's client-side JavaScript engine. No workload parameters, infrastructure configurations, or budget thresholds are sent to any remote server or stored in any database.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>How accurate are the on-demand and reserved instance comparisons?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Rates are derived from benchmark general-purpose cloud instances (e.g., AWS t3.small / t4g or equivalent 2 vCPU / 2GB RAM compute). 1-Year standard reserved commitments reflect the industry average 35–40% discount over standard on-demand compute rates.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>Why is outbound egress bandwidth so expensive on hyper-scalers?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Major cloud providers treat data egress to the public Internet as a high-margin profit center, charging $0.08–$0.12/GB. Adopting edge CDNs or zero-egress object storage (like Cloudflare R2) can drastically mitigate these fees.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>Can I export these estimates for our engineering or finance review?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! Simply click the <strong>"Download Budget Report (.md)"</strong> button. It exports a comprehensive Markdown document with your exact workload inputs, net billed expenditures, free-tier savings, and architecture optimization tips ready to paste into GitHub PRs or Notion docs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             8. FINAL CALL TO ACTION BANNER
+             =================================================================== -->
+        <section class="section-container cta-section">
+            <div class="cta-banner">
+                <div class="cta-content">
+                    <h2>Ready to Model Your Cloud Infrastructure?</h2>
+                    <p>Start modeling immediately with zero sign-up, zero cookies, and instant free-tier calculations.</p>
+                </div>
+                <div class="cta-action">
+                    <a href="#simulator" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                        Open Cost Simulator
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================================================================
+         9. ENTERPRISE RICH FOOTER (FIXED & POLISHED)
+         =================================================================== -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-columns">
+                <!-- Column 1: Brand & Mission -->
+                <div class="footer-col col-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon small">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                            </svg>
+                        </div>
+                        <strong>CloudCost<span>IQ</span></strong>
+                    </div>
+                    <p class="brand-desc">
+                        Open-access FinOps intelligence platform empowering developers and DevOps teams to forecast infrastructure burn and verify multi-cloud free tiers before deployment.
+                    </p>
+                    <div class="system-status">
+                        <span class="status-indicator"></span>
+                        <span>Engine Status: Operational (v1.0)</span>
+                    </div>
+                </div>
+
+                <!-- Column 2: FinOps Tools -->
+                <div class="footer-col">
+                    <h5 class="col-title">FinOps Tools</h5>
+                    <ul class="footer-links">
+                        <li><a href="#simulator">Interactive Cost Simulator</a></li>
+                        <li><a href="#simulator">Free Tier Calculator</a></li>
+                        <li><a href="#simulator">Startup Workload Preset</a></li>
+                        <li><a href="#simulator">Enterprise High-Traffic Preset</a></li>
+                        <li><a href="#simulator">Download Markdown Report</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Cloud Providers -->
+                <div class="footer-col">
+                    <h5 class="col-title">Cloud Intelligence</h5>
+                    <ul class="footer-links">
+                        <li><a href="#providers">AWS EC2 & S3 Free Tiers</a></li>
+                        <li><a href="#providers">Google Cloud Run & Storage</a></li>
+                        <li><a href="#providers">Azure B-Series VM Quotas</a></li>
+                        <li><a href="#providers">Cloudflare Zero-Egress R2</a></li>
+                        <li><a href="#architecture">FinOps Architecture Rules</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Community & Standards -->
+                <div class="footer-col">
+                    <h5 class="col-title">Standards & Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="#faq">Frequently Asked Questions</a></li>
+                        <li><a href="./pricing.json" target="_blank">Raw Rate Matrix (pricing.json)</a></li>
+                        <li><a href="https://www.finops.org" target="_blank" rel="noopener noreferrer">FinOps Foundation</a></li>
+                        <li><a href="#hero">Zero Telemetry Guarantee</a></li>
+                        <li><a href="#hero">MIT Open Source License</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <div class="copyright-text">
+                    &copy; 2026 <strong>CloudCostIQ</strong>. All rights reserved. Free and open FinOps utility for software engineers and cloud architects.
+                </div>
+                <div class="footer-bottom-meta">
+                    <span class="meta-pill">Client-Side Calculation Engine</span>
+                    <a href="#hero" class="back-to-top" title="Scroll to Top">
+                        <span>Back to top</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="18 15 12 9 6 15"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

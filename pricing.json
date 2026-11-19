@@ -1,0 +1,17 @@
+{
+  "currency": "USD",
+  "freeTier": {
+    "computeHours": 750,
+    "storageGB": 5,
+    "databaseHours": 750,
+    "egressGB": 100
+  },
+  "rates": {
+    "computeOnDemandPerHour": 0.0416,
+    "computeReservedPerHour": 0.025,
+    "serverlessPerMillionReq": 0.20,
+    "storagePerGB": 0.023,
+    "databasePerInstanceMonth": 15.00,
+    "egressPerGB": 0.09
+  }
+}
