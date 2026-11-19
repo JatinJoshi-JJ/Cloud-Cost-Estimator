@@ -1,12 +1,15 @@
 # ☁️ CloudCostIQ — Cloud Infrastructure Cost Estimator & FinOps Engine
 
 [![FinOps Engine](https://img.shields.io/badge/FinOps-2026%20Ready-38bdf8?style=for-the-badge&logo=googlecloud&logoColor=white)](https://github.com)
-[![Zero Dependency](https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-10b981?style=for-the-badge)](https://github.com)
+[![Zero Dependency](<https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-10b981?style=for-the-badge>)](https://github.com)
 [![Netlify Ready](https://img.shields.io/badge/Deploy-Netlify%20Ready-00c7b7?style=for-the-badge&logo=netlify&logoColor=white)](https://netlify.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-818cf8?style=for-the-badge)](LICENSE)
 
 > **Eliminate cloud bill surprises before you write a single line of Terraform or provision a virtual machine.**  
 > **CloudCostIQ** is a modern, client-side cloud economics simulator with **automated Free-Tier deductions**, real-time **budget threshold alerts**, **multi-cloud comparison matrices**, and architectural **commitment trade-off analytics**.
+
+Live Website URL :- https://cloudcostiq.netlify.app/
+GitHub Repo URL :- https://github.com/JatinJoshi-JJ/Cloud-Cost-Estimator.git
 
 ---
 
@@ -33,11 +36,11 @@
 
 ## 🚀 Quick Architecture Presets
 
-| Preset | Target Workload | Compute (hrs) | Storage (GB) | DB Nodes | Egress (GB) | Budget Target |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| 🌱 **Free Tier** | Side projects & hobby dev | `700` | `5` | `1` | `80` | `$10` |
-| 🚀 **Startup App** | Early-stage SaaS in production | `950` | `120` | `2` | `250` | `$35` |
-| 🏢 **High Traffic** | Scaled microservices & media | `2,200` | `850` | `4` | `1,500` | `$150` |
+| Preset              | Target Workload                | Compute (hrs) | Storage (GB) | DB Nodes | Egress (GB) | Budget Target |
+| :------------------ | :----------------------------- | :-----------: | :----------: | :------: | :---------: | :-----------: |
+| 🌱 **Free Tier**    | Side projects & hobby dev      |     `700`     |     `5`      |   `1`    |    `80`     |     `$10`     |
+| 🚀 **Startup App**  | Early-stage SaaS in production |     `950`     |    `120`     |   `2`    |    `250`    |     `$35`     |
+| 🏢 **High Traffic** | Scaled microservices & media   |    `2,200`    |    `850`     |   `4`    |   `1,500`   |    `$150`     |
 
 ---
 
@@ -72,11 +75,11 @@ CloudCostIQ decouples rate logic from the UI. You can customize unit rates direc
   },
   "rates": {
     "computeOnDemandPerHour": 0.0416,
-    "computeReservedPerHour": 0.0250,
-    "serverlessPerMillionReq": 0.20,
-    "storagePerGB": 0.0230,
-    "databasePerInstanceMonth": 15.00,
-    "egressPerGB": 0.0900
+    "computeReservedPerHour": 0.025,
+    "serverlessPerMillionReq": 0.2,
+    "storagePerGB": 0.023,
+    "databasePerInstanceMonth": 15.0,
+    "egressPerGB": 0.09
   }
 }
 ```
@@ -88,17 +91,21 @@ CloudCostIQ decouples rate logic from the UI. You can customize unit rates direc
 Since CloudCostIQ is built with zero build steps or heavy dependencies, you can run it locally with any static web server:
 
 ### Option 1: Python 3
+
 ```bash
 python3 -m http.server 8080
 ```
+
 Then navigate to: `http://localhost:8080`
 
 ### Option 2: Node.js (`npx serve`)
+
 ```bash
 npx serve .
 ```
 
 ### Option 3: VS Code / IDE
+
 Install the **Live Server** extension, right-click `index.html`, and choose **"Open with Live Server"**.
 
 ---
@@ -106,17 +113,21 @@ Install the **Live Server** extension, right-click `index.html`, and choose **"O
 ## 🚢 Production Deployment
 
 ### Deploy to Netlify
+
 CloudCostIQ comes pre-configured with `netlify.toml`:
+
 1. Push this repository to GitHub/GitLab.
 2. Link the repository in [Netlify](https://app.netlify.com).
 3. The build directory is `.` (root). Deploy immediately!
 
 ### Deploy to Vercel
+
 ```bash
 npx vercel .
 ```
 
 ### Deploy to GitHub Pages
+
 1. Go to your repository **Settings** → **Pages**.
 2. Select the `main` branch and `/ (root)` folder.
 3. Save to publish your live URL.
@@ -135,6 +146,7 @@ npx vercel .
 ## 🤝 Contributing
 
 Contributions, feature requests, and rate-card updates are warmly welcomed!
+
 1. Fork the Project (`git checkout -b feature/AmazingRateCard`)
 2. Commit your Changes (`git commit -m 'Add Azure Arm64 pricing rates'`)
 3. Push to the Branch (`git push origin feature/AmazingRateCard`)
